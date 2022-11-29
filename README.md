@@ -1,2 +1,2 @@
-# Ban-Idle
+# Bank-Idle
 Idle Type Bank Game
