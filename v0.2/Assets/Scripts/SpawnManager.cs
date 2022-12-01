@@ -16,9 +16,9 @@ public class SpawnManager : MonoBehaviour
     }
     private void Start()
     {
-        StartSpawn();
+        StartSpawner();
     }
-    void StartSpawn()
+    void StartSpawner()
     {
         StartCoroutine(Spawner());
     }

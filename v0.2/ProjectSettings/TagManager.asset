@@ -11,6 +11,7 @@ TagManager:
   - Teller
   - TicketBuyArea
   - BuyArea
+  - TicketWorkerBuyArea
   layers:
   - Default
   - TransparentFX

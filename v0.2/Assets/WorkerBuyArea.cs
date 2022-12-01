@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuyArea : MonoBehaviour
+public class WorkerBuyArea : MonoBehaviour
 {
     public GameObject purchasedItem;
     public Image progressImage;
@@ -22,19 +22,16 @@ public class BuyArea : MonoBehaviour
 
             if (progress >= 1)
             {
-                purchasedItem.SetActive(true);               
+               
+                purchasedItem.SetActive(true);
 
-                if (!QueManager.Instance.activatedQues.Contains(this.purchasedItem) && purchasedItem.GetComponent<TellerManager>() == null && purchasedItem.GetComponent<Worker>() == null)
-                {
-                    QueManager.Instance.activatedQues.Add(this.purchasedItem);
-                }
                 this.gameObject.SetActive(false);
                 this.enabled = false;
             }
 
 
         }
-        
+
 
     }
 }

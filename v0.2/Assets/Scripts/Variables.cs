@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Variables : MonoBehaviour
 {
-    public static Variables Instance;
+    public static Variables Instance { get; private set; }
 
     public int priority;
 
-    [Range(0,100)]
+    [Range(0, 100)]
     public float moneyValue = 10f;
 
     private void Awake()

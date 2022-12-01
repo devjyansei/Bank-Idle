@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoldManager : MonoBehaviour
 {
-    public static GoldManager Instance;
+    public static GoldManager Instance { get; private set; }
 
     public float goldAmount;
     private void Awake()

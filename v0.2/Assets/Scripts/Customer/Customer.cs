@@ -9,7 +9,7 @@ public class Customer : MonoBehaviour
 
     public Transform targetPlace;
     public Transform exitPoint;
-    public Transform waitingRoom;
+    //public Transform waitingRoom;
     private void Awake()
     {
         navmeshagent = GetComponent<NavMeshAgent>();
@@ -104,7 +104,7 @@ public class Customer : MonoBehaviour
 
                 if (targetQue.customerList[targetQue.customerList.Count - 1] != null) 
                 {
-                    QueManager.Instance.activatedQues.Remove(targetQue.gameObject);
+                    QueManager.Instance.activatedTellerQues.Remove(targetQue.gameObject);
                 }
 
                 return;

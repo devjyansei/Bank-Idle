@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QueManager : MonoBehaviour
 {
-    public static QueManager Instance;
+    public static QueManager Instance { get; private set; }
 
 
     [Header("LISTS")]
@@ -16,10 +16,8 @@ public class QueManager : MonoBehaviour
 
     public GameObject ticket1;
     public GameObject ticket2;
-    public GameObject ticket3;
     public GameObject atm1;
     public GameObject atm2;
-    //public GameObject atm3;
     public GameObject teller1;
     public GameObject teller2;
 
@@ -27,12 +25,10 @@ public class QueManager : MonoBehaviour
     {
         Instance = this;
 
-        // satýn alýndýklarýnda listeye eklenecekler
         activatedQues.Add(ticket1);
         activatedQues.Add(ticket2);
-        //activatedQues.Add(atm1);
-        //activatedQues.Add(atm2);
-        //activatedQues.Add(atm3);
+        activatedQues.Add(atm1);
+        activatedQues.Add(atm2);
         activatedTellerQues.Add(teller1);
         activatedTellerQues.Add(teller2);
     }

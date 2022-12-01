@@ -10,7 +10,6 @@ public class CustomerTriggerHandler : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-       
     }
    
 }

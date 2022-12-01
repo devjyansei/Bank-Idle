@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerTriggerHandler : MonoBehaviour
 {
-    public static PlayerTriggerHandler Instance;
+    public static PlayerTriggerHandler Instance { get; private set; }
 
     public bool securityIsWorking;
 
@@ -22,9 +22,7 @@ public class PlayerTriggerHandler : MonoBehaviour
         {
             securityIsWorking = true;
             
-            StartCoroutine(other.GetComponentInParent<SecurityManager>().securityCoroutine);
-            
-            
+            StartCoroutine(other.GetComponentInParent<SecurityManager>().securityCoroutine);                       
         }
 
         if (other.gameObject.CompareTag("Ticket"))
@@ -40,6 +38,8 @@ public class PlayerTriggerHandler : MonoBehaviour
             GoldManager.Instance.IncreaseGold(Variables.Instance.moneyValue);
             Destroy(other.gameObject);
         }
+        
+        
 
         
 
@@ -50,6 +50,11 @@ public class PlayerTriggerHandler : MonoBehaviour
         {
             other.GetComponent<BuyArea>().BuyProgress(1f);
         }
+        if (other.gameObject.CompareTag("TicketWorkerBuyArea"))
+        {
+            other.GetComponent<WorkerBuyArea>().BuyProgress(1f);
+        }
+
     }
     private void OnTriggerExit(Collider other)
     {
@@ -62,6 +67,10 @@ public class PlayerTriggerHandler : MonoBehaviour
         if (other.gameObject.CompareTag("Ticket"))
         {
             StopCoroutine(other.GetComponentInParent<TicketManager>().ticketCoroutine);
+        }
+        if (other.gameObject.CompareTag("Teller"))
+        {
+            StopCoroutine(other.GetComponentInParent<TellerManager>().tellerCoroutine);
         }
     }
    

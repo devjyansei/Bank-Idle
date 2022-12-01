@@ -15,17 +15,18 @@ public class TicketManager : MonoBehaviour
 
     public bool isQueFull;
 
-
+    
     QueOrder queOrder;
+
+ 
+
     private void Awake()
     {
         queOrder = GetComponent<QueOrder>();
     }
     private void OnEnable()
     {
-        ticketCoroutine = StartTicketCheck();
-        
-        
+        ticketCoroutine = StartTicketCheck();               
     }
     
     void TicketCheck()
@@ -33,8 +34,7 @@ public class TicketManager : MonoBehaviour
         var customerList = GetComponent<QueOrder>().customerList;
 
         //Eger ilk sýrada musteri varsa onu çýkýþa yonlendirir
-        if (customerList[0] != null)
-        {
+        
             GenerateMoney();
 
             Customer firstCustomer = customerList[0].GetComponent<Customer>();
@@ -54,25 +54,30 @@ public class TicketManager : MonoBehaviour
                 }
 
             }
-        }
+        
 
 
-       
+
     }
     public IEnumerator StartTicketCheck()
     {
         while (true)
         {
-            TicketCheck();
-            CheckQueFill();
+            if (GetComponent<QueOrder>().customerList[0] != null && QueManager.Instance.activatedTellerQues.Count > 0)
+            {
+                TicketCheck();
+                CheckQueFill();
+            }
             yield return new WaitForSeconds(1f);
+
         }
+
     }
-    
-        
-    
-            
-     void CheckQueFill()
+
+
+
+
+    void CheckQueFill()
      {
         if (queOrder.customerList[queOrder.customerList.Count-1] == null && !QueManager.Instance.activatedQues.Contains(this.gameObject))
         {
@@ -95,5 +100,9 @@ public class TicketManager : MonoBehaviour
 
         }
 
+    }
+    public void AutomateTicket()
+    {
+        //todo : çalýstýr
     }
 }
