@@ -76,7 +76,7 @@ public class TicketManager : MonoBehaviour
     {
         while (true)
         {
-            if (GetComponent<QueOrder>().customerList[0] != null && QueManager.Instance.activatedTellerQues.Count > 0)
+            if (GetComponent<QueOrder>().customerList[0] != null && QueManager.Instance.emptyTellerQues.Count > 0)
             {
                 TicketCheck();
                 CheckQueFill();
@@ -90,7 +90,7 @@ public class TicketManager : MonoBehaviour
     {
         while (true)
         {
-            if (GetComponent<QueOrder>().customerList[0] != null && QueManager.Instance.activatedTellerQues.Count > 0 && Vector3.Distance(GetComponent<QueOrder>().customerList[0].transform.position, workerStandPoint.position)< 7f)
+            if (GetComponent<QueOrder>().customerList[0] != null && QueManager.Instance.emptyTellerQues.Count > 0 && Vector3.Distance(GetComponent<QueOrder>().customerList[0].transform.position, workerStandPoint.position)< 7f)
             {
                 TicketCheck();
                 CheckQueFill();
@@ -107,9 +107,13 @@ public class TicketManager : MonoBehaviour
         if (queOrder.customerList[queOrder.customerList.Count-1] == null && !QueManager.Instance.activatedQues.Contains(this.gameObject))
         {
             QueManager.Instance.activatedQues.Add(this.gameObject);
-            QueManager.Instance.activatedTicketQues.Add(this.gameObject);
         }
-     }
+        if ((queOrder.customerList[queOrder.customerList.Count - 1] == null && !QueManager.Instance.emptyTicketQues.Contains(this.gameObject)))
+        {
+            QueManager.Instance.emptyTicketQues.Add(this.gameObject);
+
+        }
+    }
 
     public void GenerateMoney()
     {

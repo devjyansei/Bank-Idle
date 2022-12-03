@@ -28,14 +28,18 @@ public class BuyArea : MonoBehaviour
                 if (!QueManager.Instance.activatedQues.Contains(this.purchasedItem) && purchasedItem.GetComponent<TicketManager>() != null) //
                 {
                     QueManager.Instance.activatedQues.Add(this.purchasedItem);
+                    QueManager.Instance.emptyTicketQues.Add(this.purchasedItem);
                     QueManager.Instance.activatedTicketQues.Add(this.purchasedItem);
+
                     Variables.Instance.ticketWorkerBuyLimit++;
                 }
                 //eger teller açtýysak
                 else if (!QueManager.Instance.activatedQues.Contains(this.purchasedItem) && purchasedItem.GetComponent<TellerManager>() != null)
                 {
                     QueManager.Instance.activatedQues.Add(this.purchasedItem);
+                    QueManager.Instance.emptyTellerQues.Add(this.purchasedItem);
                     QueManager.Instance.activatedTellerQues.Add(this.purchasedItem);
+
                     Variables.Instance.tellerWorkerBuyLimit++;
 
                 }

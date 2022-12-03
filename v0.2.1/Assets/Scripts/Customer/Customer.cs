@@ -45,7 +45,7 @@ public class Customer : MonoBehaviour
         }
     }
     
-
+    /*
     public void SetNewTargetForTicket() // randomize system
     {
 
@@ -78,16 +78,56 @@ public class Customer : MonoBehaviour
             }
         }
                
+    }*/
+    public void SetNewTargetForTicket() // randomize system
+    {
+
+
+        
+        
+            int activeListCount = QueManager.Instance.emptyTicketQues.Count;
+
+            int randomTarget = Random.Range(0, activeListCount);
+
+            var targetQue = QueManager.Instance.emptyTicketQues[randomTarget].GetComponent<QueOrder>();
+
+
+
+            for (int i = 0; i < targetQue.queTransformsList.Count; i++)
+            {
+                if (targetQue.customerList[i] == null)
+                {
+                    targetQue.customerList[i] = this.gameObject;
+
+                    targetPlace = targetQue.queTransformsList[i];
+
+                    navmeshagent.SetDestination(targetPlace.position);
+                    //Debug.Log(this.gameObject.name + i + " numaralý sýraya girdi");
+
+                    //eðer son sýra doluysa son sýrayý boþalt
+                    if (targetQue.customerList[targetQue.customerList.Count - 1] != null)
+                    {
+                        //QueManager.Instance.activatedQues.Remove(targetQue.gameObject);
+                        QueManager.Instance.emptyTicketQues.Remove(targetQue.gameObject);
+                    }
+
+                    return;
+
+                }
+            }
+
+
+ 
+
     }
-    
-    
+
     public void SetNewTargetForTeller()
     {
-        int activeTellerCount = QueManager.Instance.activatedTellerQues.Count;
+        int activeTellerCount = QueManager.Instance.emptyTellerQues.Count;
 
         int randomTarget = Random.Range(0, activeTellerCount);
 
-        var targetQue = QueManager.Instance.activatedTellerQues[randomTarget].GetComponent<QueOrder>();
+        var targetQue = QueManager.Instance.emptyTellerQues[randomTarget].GetComponent<QueOrder>();
 
         for (int i = 0; i < targetQue.queTransformsList.Count; i++)
         {
@@ -104,13 +144,51 @@ public class Customer : MonoBehaviour
 
                 if (targetQue.customerList[targetQue.customerList.Count - 1] != null) 
                 {
-                    QueManager.Instance.activatedTellerQues.Remove(targetQue.gameObject);
+                    QueManager.Instance.emptyTellerQues.Remove(targetQue.gameObject);
                 }
 
                 return;
 
             }
         }
+    }
+    public void SetNewTargetForWaitingRoom()
+    {
+        
+            int activeWaitingRoomCount = QueManager.Instance.emptyWaitingRoomQues.Count;
+
+            int randomTarget = Random.Range(0, activeWaitingRoomCount);
+
+            var targetQue = QueManager.Instance.emptyWaitingRoomQues[randomTarget].GetComponent<QueOrder>();
+
+
+            for (int i = 0; i < targetQue.queTransformsList.Count; i++)
+            {
+                if (targetQue.customerList[i] == null)
+                {
+                    targetQue.customerList[i] = this.gameObject;
+
+                    targetPlace = targetQue.queTransformsList[i];
+
+                    navmeshagent.SetDestination(targetPlace.position);
+                    //Debug.Log(this.gameObject.name + i + " numaralý sýraya girdi");
+
+
+                    //eðer son sýra doluysa son sýrayý boþalt
+                    if (targetQue.customerList[targetQue.customerList.Count - 1] != null)
+                    {
+                        QueManager.Instance.emptyWaitingRoomQues.Remove(targetQue.gameObject);
+                    }
+
+                    return;
+
+                }
+            }
+        
+
+        
+        
+        
     }
     public void GotoExit()
     {

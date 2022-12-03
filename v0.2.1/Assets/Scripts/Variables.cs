@@ -18,7 +18,7 @@ public class Variables : MonoBehaviour
     }
     private void Start()
     {
-        ticketWorkerBuyLimit = QueManager.Instance.activatedTicketQues.Count;
-        tellerWorkerBuyLimit = QueManager.Instance.activatedTellerQues.Count;
+        ticketWorkerBuyLimit = QueManager.Instance.emptyTicketQues.Count;
+        tellerWorkerBuyLimit = QueManager.Instance.emptyTellerQues.Count;
     }
 }

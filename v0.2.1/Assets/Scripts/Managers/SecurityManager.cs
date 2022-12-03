@@ -45,20 +45,20 @@ public class SecurityManager : MonoBehaviour
                 SecurityCheck();
 
             }
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
 
         }
 
     }
     void SecurityCheck() // SECURITY SIRASINI KONTROL EDER  VE SIRAYI KAYDIRIR
     {
-        
-        
+
+
 
         //Eger ilk sýrada musteri varsa onu bir ticketa yonlendirir
-        if (queOrder.customerList[0] != null && QueManager.Instance.activatedQues.Count > 0) 
+        if (queOrder.customerList[0] != null && QueManager.Instance.emptyTicketQues.Count > 0)  // ticketa gider
         {
-
+            Debug.Log("ticketa gidicek");
             Customer firstCustomer = queOrder.customerList[0].GetComponent<Customer>();
 
             queOrder.customerList[0] = null;
@@ -75,5 +75,31 @@ public class SecurityManager : MonoBehaviour
                 }
             }
         }
+        else if (queOrder.customerList[0] != null && QueManager.Instance.emptyTicketQues.Count == 0 && QueManager.Instance.emptyWaitingRoomQues.Count > 0) // waiting rooma gider
+        {
+
+            Debug.Log("waitinge gidicek");
+
+            Customer firstCustomer = queOrder.customerList[0].GetComponent<Customer>();
+
+            queOrder.customerList[0] = null;
+            
+            firstCustomer.SetNewTargetForWaitingRoom();
+            
+            GenerateMoney();
+
+
+            //sýrayý kaydýr
+            for (int i = 1; i < queOrder.customerList.Count; i++)
+            {
+                if (queOrder.customerList[i] != null)
+                {
+                    queOrder.customerList[i].GetComponent<Customer>().AlignQue(this.GetComponent<QueOrder>());
+                    queOrder.customerList[i] = null;
+                }
+            }
+        }
+        else return;
     }
+    
 }

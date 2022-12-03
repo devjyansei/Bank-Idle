@@ -67,9 +67,10 @@ public class TellerManager : MonoBehaviour
     }
     void CheckQueFill()
     {
-        if (queOrder.customerList[queOrder.customerList.Count - 1] == null && !QueManager.Instance.activatedTellerQues.Contains(this.gameObject))
+        if (queOrder.customerList[queOrder.customerList.Count - 1] == null && !QueManager.Instance.emptyTellerQues.Contains(this.gameObject))
         {
-            QueManager.Instance.activatedTellerQues.Add(this.gameObject);
+            QueManager.Instance.emptyTellerQues.Add(this.gameObject);
+            
         }
     }
 
