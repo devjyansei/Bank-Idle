@@ -208,6 +208,9 @@ public class Customer : MonoBehaviour
     {
         StartCoroutine(CheckForEmptyTicket());
     }
+
+
+
     public IEnumerator CheckForEmptyTicket()
     {
         if (QueManager.Instance.emptyTicketQues.Count > 0 && inWaitingRoom)
